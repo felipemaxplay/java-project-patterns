@@ -1,3 +1,4 @@
+import facade.Facade;
 import singleton.SingletonEager;
 import singleton.SingletonLazy;
 import singleton.SingletonLazyHolder;
@@ -46,6 +47,12 @@ public class Main {
         robot.setBehavior(angry);
 
         robot.move();
+
+        System.out.println("---------------------------------------");
+
+        // Facade
+        Facade facade = new Facade();
+        facade.migrateClient("Venilton", "14801788");
 
         System.out.println("---------------------------------------");
     }
