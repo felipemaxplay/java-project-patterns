@@ -14,8 +14,7 @@ public class Client {
     @Column(name = "name", nullable = false, length = 20)
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address")
+    @ManyToOne
     private Address address;
 
     @Deprecated
@@ -23,6 +22,12 @@ public class Client {
     }
 
     public Client(String name, Address address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    public Client(long id, String name, Address address) {
+        this.id = id;
         this.name = name;
         this.address = address;
     }

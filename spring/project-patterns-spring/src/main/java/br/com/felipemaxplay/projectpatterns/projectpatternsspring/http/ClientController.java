@@ -1,6 +1,8 @@
 package br.com.felipemaxplay.projectpatterns.projectpatternsspring.http;
 
+import br.com.felipemaxplay.projectpatterns.projectpatternsspring.entity.Address;
 import br.com.felipemaxplay.projectpatterns.projectpatternsspring.entity.Client;
+import br.com.felipemaxplay.projectpatterns.projectpatternsspring.http.dto.request.ClientAdressDto;
 import br.com.felipemaxplay.projectpatterns.projectpatternsspring.service.ClientService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -31,14 +33,16 @@ public class ClientController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Client createClient(@RequestBody Client client) {
-        return service.createClient(client);
+    public Client createClient(@RequestBody ClientAdressDto dto) {
+        return service.createClient(dto);
     }
 
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Client updateClient(@PathVariable(name = "id") long id, @RequestBody Client client) {
-        return service.updateClient(id, client);
+    public Client updateClient(@PathVariable(name = "id") long id, @RequestBody ClientAdressDto dto) {
+        Address address = new Address(dto.getCep());
+        Client client = new Client(id, dto.getName(), address);
+        return service.updateClient(client);
     }
 
     @DeleteMapping(path = "/{id}")

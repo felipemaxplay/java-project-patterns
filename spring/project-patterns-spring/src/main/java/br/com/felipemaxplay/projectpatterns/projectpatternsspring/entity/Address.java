@@ -41,6 +41,10 @@ public class Address {
     public Address() {
     }
 
+    public Address(String cep) {
+        this.cep = cep;
+    }
+
     public Address(String cep, String logradouro, String complemento, String bairro, String localidade, String uf, String ibge, String gia, String ddd, String siafi) {
         this.cep = cep;
         this.logradouro = logradouro;

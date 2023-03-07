@@ -2,41 +2,31 @@ package br.com.felipemaxplay.projectpatterns.projectpatternsspring.service;
 
 import br.com.felipemaxplay.projectpatterns.projectpatternsspring.entity.Address;
 import br.com.felipemaxplay.projectpatterns.projectpatternsspring.repository.AddressRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.persistence.NoResultException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class AddressService implements AddressServiceInt{
+public class AddressService implements AddressServiceInt {
+
     private final AddressRepository repository;
+    private final ViaCepService viaCepService;
 
-    public AddressService(AddressRepository repository) {
+    public AddressService(AddressRepository repository, ViaCepService viaCepService) {
         this.repository = repository;
+        this.viaCepService = viaCepService;
     }
 
     @Override
-    public List<Address> getAll() {
-        return null;
+    public Address getAddressById(String cep) {
+        Address addressRetrieved = repository.findById(cep)
+                .orElseThrow(() -> new NoResultException(String.format("Address with cep: %s not found.", cep)));
+        return addressRetrieved;
     }
 
     @Override
-    public Address getById(long id) {
-        return null;
-    }
+    public Address createAddress(String cep) {
+        Address address = viaCepService.getCep(cep);
+        return repository.save(address);
+    };
 
-    @Override
-    public Address createAddress(Address address) {
-        return null;
-    }
-
-    @Override
-    public Address updateAddress(long id, Address address) {
-        return null;
-    }
-
-    @Override
-    public void deleteById(long id) {
-
-    }
 }

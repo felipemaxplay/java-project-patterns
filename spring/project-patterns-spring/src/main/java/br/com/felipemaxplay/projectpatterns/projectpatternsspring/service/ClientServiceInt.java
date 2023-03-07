@@ -1,6 +1,8 @@
 package br.com.felipemaxplay.projectpatterns.projectpatternsspring.service;
 
+import br.com.felipemaxplay.projectpatterns.projectpatternsspring.entity.Address;
 import br.com.felipemaxplay.projectpatterns.projectpatternsspring.entity.Client;
+import br.com.felipemaxplay.projectpatterns.projectpatternsspring.http.dto.request.ClientAdressDto;
 
 import java.util.List;
 
@@ -9,9 +11,9 @@ public interface ClientServiceInt {
 
     Client getById(long id);
 
-    Client createClient(Client client);
+    Client createClient(ClientAdressDto dto);
 
-    Client updateClient(long id, Client client);
+    Client updateClient(Client client);
 
     void deleteById(long id);
 }
